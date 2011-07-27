@@ -1,0 +1,48 @@
+This script helps you out in your perpetual search for the next SPOJ problem to solve! Works when you hunt for problems from another user's status page. It color codes problems based on the number of ACs, strikes out your solved problems in addition to some other tweaks.
+
+Firefox for now. :( Working on Chrome version!
+
+NOTE: For large problem lists this script will need to fetch a large number of pages. So it might slow down your connection and perform heavy downloads. Maybe a future version will be better. :) New improved version! Now fetches AC counts from some database instead of parsing hundreds of pages. Much faster and smoother than before.
+
+* It color codes problems based on the number of ACs. It uses the following color scheme, can be changed easily in the code (try it!). Note that the colors are fuzzy and uses a simple linear interpolation. For example, a problem with AC count around ~300 will appear light green and one with AC count, say 50 will have some funny blue-violet color.
+
+    AC count   ~20    ~30     ~40   ~80   ~160	      480+
+    Color      Red   Pink  Purple  Blue  Green  No Hilight
+
+* Adds hover text on each problem code with number of ACs.
+* If you are logged in, strikes out the problems you have already solved.
+* Rewrites the problem links to the actual problem page instead of the user's status for the problem. 
+
+Customization
+
+* You can toggle the problems' link-rewriting by editing the following lines near the beginning of the script.
+    // Do you want to rewrite the links from /status/PROBLEM,user/ to /problems/PROBLEM ?
+    var rewriteLinks = true;
+
+* You can also toggle fuzzy coloring!
+    // Do you want fuzzy colors?
+    var fuzzyColors = true;
+
+* You can also edit the color scheme. Look at the code for explanatory comments!
+    // ----------------------------------------------------------------------
+    // BEGIN Customize Color Scheme Here
+    // ----------------------------------------------------------------------
+
+    // If fuzzyColors is false, then every AC count is rounded to the
+    // checkpoint which is the maximum lower bound. Then that checkpoints'
+    // corresponding color is used.
+
+    // If fuzzyColors is true, the color is the weighted average of the
+    // two neighbouring checkpoints.
+    // The weight is the distance from each checkpoint.
+
+    var checkpoints = new Array( 0, 20, 40, 80, 160, 480, 1155347700 );
+    // bright red, red, purple, blue, green, yellow/spoj bg
+    var red = new Array( 255, 255, 200, 200, 150, 246, 246 );
+    var green = new Array( 100, 150, 150, 200, 255, 249, 249 );
+    var blue = new Array( 100, 150, 255, 255, 150, 224, 224 );
+
+
+    // ----------------------------------------------------------------------
+    // END Customize Color Scheme Here
+    // ----------------------------------------------------------------------
