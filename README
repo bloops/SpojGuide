@@ -1,8 +1,6 @@
 This script helps you out in your perpetual search for the next SPOJ problem to solve! Works when you hunt for problems from another user's status page. It color codes problems based on the number of ACs, strikes out your solved problems in addition to some other tweaks.
 
-Firefox for now. :( Working on Chrome version!
-
-NOTE: For large problem lists this script will need to fetch a large number of pages. So it might slow down your connection and perform heavy downloads. Maybe a future version will be better. :) New improved version! Now fetches AC counts from some database instead of parsing hundreds of pages. Much faster and smoother than before.
+Firefox only for now. :( Working on Chrome version!
 
 * It color codes problems based on the number of ACs. It uses the following color scheme, can be changed easily in the code (try it!). Note that the colors are fuzzy and uses a simple linear interpolation. For example, a problem with AC count around ~300 will appear light green and one with AC count, say 50 will have some funny blue-violet color.
 

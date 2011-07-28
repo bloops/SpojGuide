@@ -64,7 +64,7 @@ class BuildDatabase(webapp.RequestHandler):
       prob = ProblemInfo(key_name=code)
       prob.code = code
       prob.users = users
-      prob.put()
+      self.updated.append(prob)
     except:
       self.response.out.write("Database Error\n")
       
@@ -78,6 +78,7 @@ class BuildDatabase(webapp.RequestHandler):
     readingProblem = False
     problemLines = []
 
+    self.updated = []
     for l in lines:
       if('problemrow' in l):
         readingProblem = True
@@ -90,6 +91,9 @@ class BuildDatabase(webapp.RequestHandler):
       if(readingProblem):
         problemLines.append(l)
 
+    db.put(self.updated)
+    self.updated = []
+    
 
   def get(self):
     start = int(self.request.get('start'))
