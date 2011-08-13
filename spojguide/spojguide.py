@@ -50,6 +50,22 @@ class FetchProblem(webapp.RequestHandler):
         l = l[4:-6];
         return l
 
+class GetProblems(webapp.RequestHandler):
+  def fetchProblemFromDb(self,probcode):
+    if(not probcode):
+      self.response.out.write("-2\n")
+      return
+    p = db.get(db.Key.from_path('ProblemInfo',probcode))
+    if(p):
+      self.response.out.write(probcode + " " + str(p.users) + "\n")
+    else:
+      self.response.out.write("-1\n")
+
+  def post(self):
+    self.response.headers['Content-Type'] = 'text/plain'
+    problems = self.request.get('problems').split(",");
+    for p in problems:
+      self.fetchProblemFromDb(p)
 
 class BuildDatabase(webapp.RequestHandler):
 
@@ -107,7 +123,8 @@ class BuildDatabase(webapp.RequestHandler):
 application = webapp.WSGIApplication([
     ('/', MainPage),
     ('/fetch',FetchProblem),  
-    ('/build',BuildDatabase)
+    ('/build',BuildDatabase),
+    ('/get', GetProblems)
 ], debug=True)
 
 
